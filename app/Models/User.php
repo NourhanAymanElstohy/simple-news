@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use Illuminate\Contracts\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
+    protected $collection = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -40,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

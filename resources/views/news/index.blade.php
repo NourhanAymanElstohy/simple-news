@@ -28,8 +28,10 @@
                             @foreach ($news->comments as $comment)
                                 <div> 
                                     <i class="fa fa-comment text-secondary"></i> <strong class="text-primary">{{ $comment->user->name }}</strong> : {{ $comment->comment }} 
-                                    <a class="mr-2" data-toggle="modal" data-target="#editComment-{{ $comment->_id }}" style="cursor: pointer">edit</a>
-                                    <a class="mr-2" data-toggle="modal" data-target="#deleteComment-{{$comment->_id}}" style="cursor: pointer">delete</a>
+                                    @if (Auth::id() == $comment->user_id)
+                                        <a class="mr-2" data-toggle="modal" data-target="#editComment-{{ $comment->_id }}" style="cursor: pointer">edit</a>
+                                        <a class="mr-2" data-toggle="modal" data-target="#deleteComment-{{$comment->_id}}" style="cursor: pointer">delete</a>
+                                    @endif
 
                                     <div class="modal fade" id="editComment-{{ $comment->_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">

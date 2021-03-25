@@ -25,14 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/newses', [NewsController::class, 'index'])->name('news.index');
-    Route::get('/newses/create', [NewsController::class, 'create'])->name('news.create');
-    Route::post('/newses', [NewsController::class, 'store'])->name('news.store');
-    Route::put('newses/{news}', [NewsController::class, 'update'])->name('news.edit');
-    Route::delete('newses/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
-
-    Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-    Route::get('/comments/edit', [CommentController::class, 'edit'])->name('comments.edit');
-    Route::post('/comments/{news}', [CommentController::class, 'store'])->name('comments.store');
-    Route::put('comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::put('comments/{comment_id}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('comments/{comment_id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });

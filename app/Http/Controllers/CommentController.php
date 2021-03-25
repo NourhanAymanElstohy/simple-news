@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index()
-    {
-        # code...
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -22,21 +17,24 @@ class CommentController extends Controller
             'news_id' => $request->news,
             'user_id' => auth()->id(),
         ]);
-        return redirect()->route('news.index')->with('suceess', 'comment added');
+        return redirect()->route('news.index')->with('suceess', 'comment added successfully');
     }
 
-    public function edit()
+    public function update(Request $request)
     {
-        # code...
+        $request->validate([
+            'comment' => 'required'
+        ]);
+
+        $comment = Comment::find($request->comment_id);
+        $comment->update(['comment' => $request->comment]);
+        return redirect()->route('news.index')->with('success', 'Comment updated successfully');
     }
 
-    public function update()
+    public function destroy($id)
     {
-        # code...
-    }
-
-    public function destroy()
-    {
-        # code...
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return redirect()->route('news.index')->with('success', 'comment deleted successfully');
     }
 }

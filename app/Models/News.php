@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 class News extends Model
 {
-    // protected $connection = 'news_db';
+    use HasFactory;
     protected $collection = 'news';
 
     protected $fillable = ['title', 'body'];

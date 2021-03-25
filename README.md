@@ -53,7 +53,7 @@ Generate a new application key
 php artisan key:generate
 ```
 
-Write Your Database Name in .env
+Create a database in mongodb then write Your Database Name in .env
 
 ```
 DB_DATABASE=your_db_name
